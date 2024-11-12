@@ -105,8 +105,8 @@ struct attendance
 {
 	bool presence;
 
-	attendance(string d = "", int entime = 0, int extime = 0)
-		: date{ d }, entryTime{ entime }, exitTime{ extime }, presence{ false }, leave{ leaveType::unpaid }
+	attendance(string d = "", int entime = 0, int extime = 0, bool p=false)
+		: date{ d }, entryTime{ entime }, exitTime{ extime }, presence{ p }, leave{ leaveType::unpaid }
 	{
 		hoursWorked = exitTime - entryTime;
 	}
@@ -153,6 +153,10 @@ public:
 
 	}
 
+	attendance add_attendance(string date, int entryTime, int exitTime, bool presence)
+	{
+		return attendance(date, entryTime, exitTime, presence);
+	}
 
 
 
@@ -201,6 +205,13 @@ public:
 	{
 
 	}
+
+	void add_attendance(const attendance& a)
+	{
+		attendance_record.push_back(a);
+	}
+
+
 
 };
 

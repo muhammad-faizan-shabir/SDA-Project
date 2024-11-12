@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 
@@ -11,6 +12,94 @@ enum class leaveType
 	unpaid,
 	none
 };
+
+
+
+class leaveApplication
+{
+
+protected:
+
+
+	string employeeName;
+	string employeeID;
+	leaveType leave_type;
+	string dateFrom;
+	string dateTo;
+	string leaveAddress;
+	string applicationDate;
+	bool status;
+	string approvalDate;
+
+	leaveApplication(string name, string id, leaveType leave, string from, string to, string address, string app_date, bool s, string apprvl_date)
+		:	employeeName{name}, employeeID{id}, leave_type{leave}, dateFrom{from}, dateTo{to}, leaveAddress{address}, status{s}, approvalDate{apprvl_date}
+	{
+
+	}
+
+
+};
+
+class casualLeave : public leaveApplication
+{
+public:
+
+	casualLeave(string name, string id, string from, string to, string address, string app_date, bool s, string apprvl_date)
+		:leaveApplication{ name, id, leaveType::casual, from, to,  address, app_date, s, apprvl_date }
+	{
+
+	}
+	
+
+
+
+};
+
+class earnedLeave : public leaveApplication
+{
+public:
+	earnedLeave(string name, string id, string from, string to, string address, string app_date, bool s, string apprvl_date)
+		:leaveApplication{ name, id, leaveType::earned, from, to,  address, app_date, s, apprvl_date }
+	{
+
+	}
+	
+
+
+
+};
+
+class officialLeave : public leaveApplication
+{
+public:
+
+	officialLeave(string name, string id, string from, string to, string address, string app_date, bool s, string apprvl_date)
+		:leaveApplication{ name, id, leaveType::official, from, to,  address, app_date, s, apprvl_date }
+	{
+
+	}
+	
+
+
+
+};
+
+class unpaidLeave : public leaveApplication
+{
+public:
+	
+	unpaidLeave(string name, string id, string from, string to, string address, string app_date, bool s, string apprvl_date)
+		:leaveApplication{ name, id, leaveType::unpaid, from, to,  address, app_date, s, apprvl_date }
+	{
+
+	}
+	
+	
+
+
+};
+
+
 
 struct attendance
 {
@@ -37,11 +126,14 @@ private:
 
 class person
 {
+
+protected:
+
 	string name;
 	string id;
 	string loginPassword;
 
-protected:
+
 
 	person(string n = "", string id1 = "", string pass = "")
 		: name{ n }, id{ id1 }, loginPassword{ pass }
@@ -101,8 +193,7 @@ class employee : public person
 
 	int casualLeavesAvailable;
 	int earnedLeavesAvailable;
-
-
+	vector<attendance> attendance_record;
 
 public:
 	employee(string n = "", string id1 = "", string pass = "")

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Date.h"
 using namespace std;
 
 
@@ -28,11 +29,13 @@ protected:
 	string dateTo;
 	string leaveAddress;
 	string applicationDate;
+	string reason;
 	bool status;
 	string approvalDate;
+	int days;
 
-	leaveApplication(string name, string id, leaveType leave, string from, string to, string address, string app_date, bool s, string apprvl_date)
-		:	employeeName{name}, employeeID{id}, leave_type{leave}, dateFrom{from}, dateTo{to}, leaveAddress{address}, status{s}, approvalDate{apprvl_date}
+	leaveApplication(string name, string id, leaveType leave, string from, string to,int d , string address, string reasn, string app_date="", bool s=false, string apprvl_date="")
+		:	employeeName{name}, employeeID{id}, leave_type{leave}, dateFrom{from}, dateTo{to}, days{d} , leaveAddress{address},reason{reasn}, status{s}, approvalDate{apprvl_date}
 	{
 
 	}
@@ -44,8 +47,8 @@ class casualLeave : public leaveApplication
 {
 public:
 
-	casualLeave(string name, string id, string from, string to, string address, string app_date, bool s, string apprvl_date)
-		:leaveApplication{ name, id, leaveType::casual, from, to,  address, app_date, s, apprvl_date }
+	casualLeave(string name, string id, string from, string to, int days ,string address, string reason, string app_date="", bool s=false, string apprvl_date="")
+		:leaveApplication{ name, id, leaveType::casual, from, to, days  ,address, reason, app_date, s, apprvl_date }
 	{
 
 	}
@@ -58,8 +61,8 @@ public:
 class earnedLeave : public leaveApplication
 {
 public:
-	earnedLeave(string name, string id, string from, string to, string address, string app_date, bool s, string apprvl_date)
-		:leaveApplication{ name, id, leaveType::earned, from, to,  address, app_date, s, apprvl_date }
+	earnedLeave(string name, string id, string from, string to,int d, string address,string reason, string app_date, bool s, string apprvl_date)
+		:leaveApplication{ name, id, leaveType::earned, from, to,d ,  address, reason, app_date, s, apprvl_date }
 	{
 
 	}
@@ -73,8 +76,8 @@ class officialLeave : public leaveApplication
 {
 public:
 
-	officialLeave(string name, string id, string from, string to, string address, string app_date, bool s, string apprvl_date)
-		:leaveApplication{ name, id, leaveType::official, from, to,  address, app_date, s, apprvl_date }
+	officialLeave(string name, string id, string from, string to, int days, string address, string reason, string app_date, bool s, string apprvl_date)
+		:leaveApplication{ name, id, leaveType::official, from, to, days,  address, reason, app_date, s, apprvl_date }
 	{
 
 	}
@@ -88,8 +91,8 @@ class unpaidLeave : public leaveApplication
 {
 public:
 	
-	unpaidLeave(string name, string id, string from, string to, string address, string app_date, bool s, string apprvl_date)
-		:leaveApplication{ name, id, leaveType::unpaid, from, to,  address, app_date, s, apprvl_date }
+	unpaidLeave(string name, string id, string from, string to,int days ,string address, string reason ,string app_date, bool s, string apprvl_date)
+		:leaveApplication{ name, id, leaveType::unpaid, from, to, days , address, reason, app_date, s, apprvl_date }
 	{
 
 	}
@@ -104,9 +107,10 @@ public:
 struct attendance
 {
 	bool presence;
+	string id;
 
-	attendance(string d = "", int entime = 0, int extime = 0, bool p=false)
-		: date{ d }, entryTime{ entime }, exitTime{ extime }, presence{ p }, leave{ leaveType::unpaid }
+	attendance(string id1, string d = "", int entime = 0, int extime = 0, bool p=false)
+		: id{id1}, date{d}, entryTime{entime}, exitTime{extime}, presence{p}, leave{leaveType::none}
 	{
 		hoursWorked = exitTime - entryTime;
 	}
@@ -153,9 +157,9 @@ public:
 
 	}
 
-	attendance add_attendance(string date, int entryTime, int exitTime, bool presence)
+	attendance add_attendance(string id1, string date, int entryTime, int exitTime, bool presence)
 	{
-		return attendance(date, entryTime, exitTime, presence);
+		return attendance(id1, date, entryTime, exitTime, presence);
 	}
 
 
@@ -208,10 +212,45 @@ public:
 
 	void add_attendance(const attendance& a)
 	{
-		attendance_record.push_back(a);
+		if (a.id==this->id)
+		{
+			attendance_record.push_back(a);
+			cout << "Attendance for " << this->name << " added successfully";
+		}
+
+		else
+		{
+			cout << "Employee not found";
+		}
+		
 	}
 
+	string getName()
+	{
+		return name;
+	}
 
+	string getID()
+	{
+		return id;
+	}
+
+	leaveApplication* apply_leave(string from, string to, int days, string address, string reason)
+	{
+		if (casualLeavesAvailable>0 && days<=4)
+		{
+			if (casualLeavesAvailable<days)
+			{
+				cout << "Not enough leaves available";
+				return nullptr;
+			}
+
+			casualLeavesAvailable = casualLeavesAvailable - days;
+
+			return new casualLeave(name, id, from, to, days, address, reason);
+		}
+	
+	}
 
 };
 
@@ -220,5 +259,22 @@ public:
 
 int main()
 {
+	/*employee kayan("Kayan", "1920", "helloworld");
+
+	guard shabi;
+
+	kayan.add_attendance(shabi.add_attendance("1920", "13-11-2024", 8, 13, true));*/
+
+	string hi = "13-12-2004";
+
+	Date dec(hi);
+
+	dec.print();
+
+
+
+	
+
+
 
 }

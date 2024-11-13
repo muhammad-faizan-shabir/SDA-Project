@@ -68,6 +68,7 @@ public:
     // Print the date in dd/mm/yyyy format
     void print() const {
         printf("%02d/%02d/%04d\n", day, month, year);
+        std::cout << std::endl;
     }
 
     // Convert the date to a string in dd-mm-yyyy format
@@ -148,4 +149,3 @@ public:
         return !(*this < other);
     }
 };
-

@@ -525,11 +525,22 @@ public:
 
 			else if (days > 4 && days <= 21)
 			{
+
+				if (earnedLeavesAvailable<days)
+				{
+					cout << "Not enough leaves available" << endl;
+					return nullptr;
+				}
+
+
 				leaveApplication* la = new earnedLeave(name, id, from, to, days, address, reason);
 				bool check = sp.getApplication(la);
 
+				earnedLeavesAvailable = earnedLeavesAvailable - days;
+
 				if (check == true)
 				{
+
 					
 					return la;
 				}

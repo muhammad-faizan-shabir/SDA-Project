@@ -1,6 +1,0 @@
-﻿  ALMS.cpp
-C:\Users\Buyerspk.com\Documents\GitHub\SDA-Project\SDA Project\SDA Project\ALMS.cpp(639,1): warning C4715: 'employee::apply_leave': not all control paths return a value
-C:\Users\Buyerspk.com\Documents\GitHub\SDA-Project\SDA Project\SDA Project\ALMS.cpp(172,1): warning C4715: 'SupervisorApprovalStrategy::approve': not all control paths return a value
-C:\Users\Buyerspk.com\Documents\GitHub\SDA-Project\SDA Project\SDA Project\ALMS.cpp(204,1): warning C4715: 'DirectorApprovalStrategy::approve': not all control paths return a value
-C:\Users\Buyerspk.com\Documents\GitHub\SDA-Project\SDA Project\SDA Project\ALMS.cpp(184,1): warning C4715: 'SupervisorApprovalStrategy::reject': not all control paths return a value
-  SDA Project.vcxproj -> C:\Users\Buyerspk.com\Documents\GitHub\SDA-Project\SDA Project\x64\Debug\SDA Project.exe

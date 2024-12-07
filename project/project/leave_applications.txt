@@ -1,0 +1,4 @@
+Owais 1006 CasualLeave 01-12-2024 04-12-2024 Lahore sick 01-12-2024 PendingAtSupervisorOnly None
+Owais 1006 EarnedLeave 01-12-2024 06-12-2024 Lahore sick 01-12-2024 PendingAtSupervisor None
+Sahil 1007 OfficialLeave 01-12-2024 01-12-2024 Lahore sick 01-12-2024 PendingAtSupervisorOnly None
+Sahil 1007 UnpaidLeave 01-03-2024 01-07-2024 Lahore wedding 01-01-2024 PendingAtSupervisor None
